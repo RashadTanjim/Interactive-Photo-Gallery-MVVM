@@ -4,8 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
-
-//    id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -83,6 +82,10 @@ dependencies {
     // Hilt-Draggier for Dependency Injection
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Third-party
     implementation "io.coil-kt:coil:1.4.0"
