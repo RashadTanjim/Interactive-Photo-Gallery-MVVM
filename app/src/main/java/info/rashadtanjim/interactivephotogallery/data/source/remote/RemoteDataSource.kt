@@ -16,6 +16,11 @@ import java.util.concurrent.TimeUnit
 class RemoteDataSource {
 
     companion object {
+        /**
+         * Assigning Base URL {BASE_URL} for production level use.
+         *
+         * Assigning Base URL UAT {BASE_URL_UAT} for debugging and testing level use.
+         */
 
         private const val BASE_URL = "https://picsum.photos/v2/"
         private const val BASE_URL_UAT = "https://picsum.photos/v2/"
@@ -55,6 +60,10 @@ class RemoteDataSource {
             .build()
     }
 
+    /**
+     * This interceptor will be called both if the network is available and if the network is not available
+     * @return
+     */
     private fun offlineInterceptor(): Interceptor {
         return Interceptor { chain ->
             var request = chain.request()
@@ -74,6 +83,10 @@ class RemoteDataSource {
         }
     }
 
+    /**
+     * This interceptor will be called ONLY if the network is available
+     * @return
+     */
     private fun networkInterceptor(): Interceptor {
         return Interceptor { chain ->
             val response = chain.proceed(chain.request())
