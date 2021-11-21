@@ -4,11 +4,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.AndroidEntryPoint
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.ActivityMainBinding
 
-@ActivityScoped
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
