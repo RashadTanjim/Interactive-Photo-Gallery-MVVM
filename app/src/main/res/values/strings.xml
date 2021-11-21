@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Interactive Photo Gallery</string>
+    <string name="nothing_found">Nothing found</string>
 </resources>
