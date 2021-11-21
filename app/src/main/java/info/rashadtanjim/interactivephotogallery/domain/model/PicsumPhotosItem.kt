@@ -1,10 +1,12 @@
 package info.rashadtanjim.interactivephotogallery.domain.model
 
-
+import androidx.room.ColumnInfo
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Entity(tableName = "photo")
 data class PicsumPhotosItem(
-    val author: String,
+    @ColumnInfo(name = "author") val author: String,
     val download_url: String,
     val height: Int,
     @PrimaryKey
