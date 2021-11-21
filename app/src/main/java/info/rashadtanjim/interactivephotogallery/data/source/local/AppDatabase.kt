@@ -5,13 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotoList
 import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotosItem
-
 
 @Database(
     entities = [PicsumPhotosItem::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 

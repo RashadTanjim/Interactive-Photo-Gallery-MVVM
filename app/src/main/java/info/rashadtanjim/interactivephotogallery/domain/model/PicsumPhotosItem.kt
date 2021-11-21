@@ -1,15 +1,16 @@
 package info.rashadtanjim.interactivephotogallery.domain.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "photo")
 data class PicsumPhotosItem(
-    @ColumnInfo(name = "author") val author: String,
+    val author: String,
     val download_url: String,
     val height: Int,
     @PrimaryKey
+    @SerializedName("id")
     val id: String,
     val url: String,
     val width: Int

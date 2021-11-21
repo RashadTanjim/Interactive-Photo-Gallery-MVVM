@@ -1,6 +1,8 @@
 package info.rashadtanjim.core.utlis
 
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
 fun View.visible(isVisible: Boolean) {
@@ -18,4 +20,8 @@ fun View.snakbar(
         }
     }
     snackbar.show()
+}
+
+fun Fragment.showToast(message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
