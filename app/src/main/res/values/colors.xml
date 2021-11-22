@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#6E1FEA</color>
-    <color name="background">#E5E5E5</color>
+    <color name="background">#EDEDED</color>
     <color name="buttonRounded">#6E1FEA</color>
     <color name="teal_700">#FF018786</color>
     <color name="napPrimaryVariant">#681FDA</color>
@@ -12,6 +12,9 @@
     <color name="toolbarBackground">#6E1FEA</color>
     <color name="cardBackground">#FFFFFF</color>
     <color name="boldText">#160F32</color>
-    <color name="itemBackground">#FFFFFF</color>
+
+    <color name="itemImageBackground">#66000000</color>
+    <color name="itemImageForeground">#4D000000</color>
+    <color name="iconTint">#606268</color>
 
 </resources>
