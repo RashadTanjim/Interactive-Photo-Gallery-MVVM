@@ -17,9 +17,9 @@ class RemoteDataSource {
 
     companion object {
         /**
-         * Assigning Base URL {BASE_URL} for production level use.
+         * Assigning Base URL [BASE_URL] for production level use.
          *
-         * Assigning Base URL UAT {BASE_URL_UAT} for debugging and testing level use.
+         * Assigning Base URL UAT [BASE_URL_UAT] for debugging and testing level use.
          */
 
         private const val BASE_URL = "https://picsum.photos/v2/"
@@ -44,9 +44,11 @@ class RemoteDataSource {
         return OkHttpClient.Builder()
             .cache(cache())
             .addInterceptor { chain ->
-                chain.proceed(chain.request()
-                    .newBuilder()
-                    .build())
+                chain.proceed(
+                    chain.request()
+                        .newBuilder()
+                        .build()
+                )
             }.also {
                 if (BuildConfig.DEBUG) {
                     it.addInterceptor(httpLoggingInterceptor()) // used if network off OR on

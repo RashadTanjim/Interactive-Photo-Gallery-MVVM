@@ -1,4 +1,4 @@
-package info.rashadtanjim.interactivephotogallery.ui.fragments
+package info.rashadtanjim.interactivephotogallery.ui.fragment
 
 import androidx.fragment.app.Fragment
 
