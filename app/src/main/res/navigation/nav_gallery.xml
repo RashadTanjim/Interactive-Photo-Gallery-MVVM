@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="info.rashadtanjim.interactivephotogallery.ui.fragments.GalleryFragment"
+        android:name="info.rashadtanjim.interactivephotogallery.ui.fragment.GalleryFragment"
         android:label="GalleryFragment"
         tools:layout="@layout/fragment_gallery">
         <action
@@ -27,12 +27,12 @@
     </fragment>
     <fragment
         android:id="@+id/photoViewFragment"
-        android:name="info.rashadtanjim.interactivephotogallery.ui.fragments.PhotoViewFragment"
+        android:name="info.rashadtanjim.interactivephotogallery.ui.fragment.PhotoViewFragment"
         android:label="PhotoViewFragment"
         tools:layout="@layout/fragment_photo_view" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="info.rashadtanjim.interactivephotogallery.ui.fragments.SettingsFragment"
+        android:name="info.rashadtanjim.interactivephotogallery.ui.fragment.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutAppFragment"
-        android:name="info.rashadtanjim.interactivephotogallery.ui.fragments.AboutAppFragment"
+        android:name="info.rashadtanjim.interactivephotogallery.ui.fragment.AboutAppFragment"
         android:label="AboutAppFragment"
         tools:layout="@layout/fragment_about_app" />
 </navigation>

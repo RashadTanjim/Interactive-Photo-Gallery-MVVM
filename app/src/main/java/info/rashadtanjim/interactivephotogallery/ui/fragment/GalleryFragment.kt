@@ -1,16 +1,14 @@
-package info.rashadtanjim.interactivephotogallery.ui.fragments
+package info.rashadtanjim.interactivephotogallery.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
-import dagger.hilt.android.scopes.FragmentScoped
 import info.rashadtanjim.core.utlis.showToast
 import info.rashadtanjim.core.utlis.snakbar
 import info.rashadtanjim.interactivephotogallery.App
+import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.data.repository.UserRepository
 import info.rashadtanjim.interactivephotogallery.data.source.remote.PicsumApi
 import info.rashadtanjim.interactivephotogallery.data.util.DataState
@@ -24,22 +22,20 @@ class GalleryFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.isVisible = false
-
         viewModel.photoList.observe(viewLifecycleOwner, {
 
             when (it) {
                 is DataState.Success -> {
                     //success update result
-                    showToast("Success!")
                     binding.progressBar.isVisible = false
+                    showToast("Success!")
                 }
                 is DataState.Loading -> {
                     binding.progressBar.isVisible = true
                 }
                 is DataState.Failure -> {
                     binding.progressBar.isVisible = false
-                    binding.root.snakbar("Please Check your internet connection!")
+                    binding.root.snakbar(getString(R.string.no_internet_connection))
                 }
             }
         })

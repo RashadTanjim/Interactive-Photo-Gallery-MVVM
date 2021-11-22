@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Interactive Photo Gallery</string>
     <string name="nothing_found">Nothing found</string>
+    <string name="no_internet_connection">Please check your internet connection!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+
 </resources>

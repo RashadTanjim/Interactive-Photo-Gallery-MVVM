@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:title="Interactive Photo Gallery"
+        app:title="@string/app_name"
         app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
