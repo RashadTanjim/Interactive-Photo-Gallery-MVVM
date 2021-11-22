@@ -12,5 +12,9 @@
     <color name="toolbarBackground">#211F46</color>
     <color name="cardBackground">#242153</color>
     <color name="boldText">#FFFFFF</color>
-    <color name="itemBackground">#242153</color>
+
+    <color name="itemImageBackground">#66000000</color>
+    <color name="itemImageForeground">#4D000000</color>
+    <color name="iconTint">#606268</color>
+
 </resources>
