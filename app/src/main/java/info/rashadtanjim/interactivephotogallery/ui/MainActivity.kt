@@ -1,18 +1,15 @@
 package info.rashadtanjim.interactivephotogallery.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import dagger.hilt.android.AndroidEntryPoint
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.ActivityMainBinding
+import info.rashadtanjim.interactivephotogallery.ui.base.BaseActivity
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    private val sharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
