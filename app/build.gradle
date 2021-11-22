@@ -5,11 +5,17 @@ plugins {
     id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id "androidx.navigation.safeargs"
 }
 
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
+
+    /**
+     * TODO: Optimize repository mapping problem
+     * Warning: Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01
+     */
 
     defaultConfig {
         applicationId "info.rashadtanjim.interactivephotogallery"
@@ -99,8 +105,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
-    // Third-party
+    // Photo Loader
     implementation "io.coil-kt:coil:1.4.0"
+    implementation 'com.jsibbold:zoomage:1.3.0'
 
     // Testing
     testImplementation 'junit:junit:4.13.2'
