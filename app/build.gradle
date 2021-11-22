@@ -39,7 +39,6 @@ android {
     }
     buildFeatures {
         viewBinding true
-        dataBinding true
     }
     androidExtensions {
         features = ["parcelize"]
@@ -85,7 +84,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Local datastore and room
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences:$preferences_version"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
