@@ -15,7 +15,6 @@ import javax.inject.Inject
 
 abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseRepository> : Fragment() {
 
-    @Inject
     lateinit var userPreferences: UserPreferences
 
     protected lateinit var binding: B
