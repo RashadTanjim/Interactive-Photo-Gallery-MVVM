@@ -1,16 +1,20 @@
 package info.rashadtanjim.core.utlis
 
 import android.Manifest
+import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.provider.MediaStore
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
+import java.io.OutputStream
 
 fun Context.isConnected(): Boolean {
     val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -63,4 +67,38 @@ fun Context.saveToSdCard(bitmap: Bitmap): String? {
         e.printStackTrace()
     }
     return stored
+}
+
+//Make sure to call this function on a worker thread, else it will block main thread
+fun Context.saveImageInQ(bitmap: Bitmap): Uri? {
+    val filename = "PICSUM_PHOTO_${System.currentTimeMillis()}"
+    var fos: OutputStream? = null
+    var imageUri: Uri? = null
+
+    val contentValues = ContentValues().apply {
+        put(MediaStore.MediaColumns.DISPLAY_NAME, System.currentTimeMillis().toString())
+        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { //this one
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+            put(MediaStore.MediaColumns.IS_PENDING, 1)
+        }
+    }
+
+    //use application context to get contentResolver
+    val contentResolver = this.contentResolver
+
+    contentResolver.also { resolver ->
+        imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        fos = imageUri?.let { resolver.openOutputStream(it) }
+    }
+
+    fos?.use { bitmap.compress(Bitmap.CompressFormat.JPEG, 70, it) }
+
+    contentValues.clear()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        contentValues.put(MediaStore.Video.Media.IS_PENDING, 0)
+    }
+    imageUri?.let { contentResolver.update(it, contentValues, null, null) }
+
+    return imageUri
 }

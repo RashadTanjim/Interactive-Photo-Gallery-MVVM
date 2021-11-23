@@ -1,15 +1,16 @@
-package info.rashadtanjim.interactivephotogallery.ui.fragment
+package info.rashadtanjim.interactivephotogallery.ui.gallery
 
 import android.Manifest
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -19,7 +20,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.dynamiclinks.DynamicLink.*
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
@@ -103,41 +103,79 @@ class PhotoViewFragment : DialogFragment() {
         /**
          * Event: The action listen will trigger devices' default sharing option to share photo
          * The Task will be done using firebase's [FirebaseDynamicLinks]
+         * Before sharing [hasStoragePermission] checks write permission
          */
 
         binding.imageButtonShare.setOnClickListener {
 
-            FirebaseDynamicLinks.getInstance()
-                .createDynamicLink()
-                .setLink(Uri.parse("https://interactivephotogallery.page.link/picsum/$selectedPhoto"))
-                .setDomainUriPrefix("https://rashadtanjim.info")
-                .setAndroidParameters(
-                    AndroidParameters.Builder("info.rashadtanjim.interactivephotogallery")
-                        .setMinimumVersion(1)
-                        .build()
-                )
-                .setSocialMetaTagParameters(
-                    SocialMetaTagParameters.Builder()
-                        .setTitle("https://interactivephotogallery.page.link/picsum")
-                        .setDescription(getString(R.string.about_app))
-                        .setTitle(getString(R.string.app_name))
-                        .build()
-                )
-                .buildShortDynamicLink()
-                .addOnCompleteListener { task: Task<ShortDynamicLink> ->
-                    if (task.isSuccessful) {
-                        val shortLink = task.result.shortLink
-                        val intent = Intent()
-                        intent.action = Intent.ACTION_SEND
-                        intent.putExtra(Intent.EXTRA_STREAM, shortLink)
-                        intent.type = "image/*"
-                        val shareIntent = Intent.createChooser(intent, "Share Photo!")
-                        startActivity(shareIntent, null)
-                    } else {
-                        showToast(getString(R.string.something_went_wrong))
-                    }
+            val mBitmap = binding.zoomViewPhoto.drawable.toBitmap()
+
+            if (requireContext().hasStoragePermission()) {
+
+                val uri: Uri? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    requireContext().saveImageInQ(mBitmap)
+                } else {
+                    val path = MediaStore.Images.Media.insertImage(
+                        requireActivity().contentResolver, mBitmap,
+                        "Image Description", null
+                    )
+                    Uri.parse(path)
                 }
 
+                FirebaseDynamicLinks.getInstance()
+                    .createDynamicLink()
+                    .setLink(Uri.parse("https://rashadtanjim.info/picsum/$selectedPhoto"))
+                    .setDomainUriPrefix("https://rashadtanjim.info")
+                    .setAndroidParameters(
+                        AndroidParameters.Builder("info.rashadtanjim.interactivephotogallery")
+                            .setMinimumVersion(0)
+                            .build()
+                    )
+                    .setIosParameters(
+                        IosParameters.Builder("info.rashadtanjim.interactivephotogallery")
+                            .setAppStoreId("0000000000")
+                            .setMinimumVersion("0.0.1")
+                            .build()
+                    )
+                    .setGoogleAnalyticsParameters(
+                        GoogleAnalyticsParameters.Builder()
+                            .setSource("picsum")
+                            .setMedium("social")
+                            .setCampaign("picsum-images")
+                            .build()
+                    )
+                    .setSocialMetaTagParameters(
+                        SocialMetaTagParameters.Builder()
+                            .setTitle("rashadtanjim.info")
+                            .setDescription(getString(R.string.about_app))
+                            .setTitle(getString(R.string.app_name))
+                            .build()
+                    )
+                    .buildShortDynamicLink()
+                    .addOnCompleteListener { task: Task<ShortDynamicLink> ->
+                        if (task.isSuccessful) {
+                            val shortLink = task.result.shortLink
+
+                            val intent = Intent()
+                            intent.action = Intent.ACTION_SEND
+
+                            intent.putExtra(Intent.EXTRA_TEXT, "&$shortLink")
+                            intent.putExtra(Intent.EXTRA_STREAM, uri)
+
+//                            intent.setDataAndType(uri, "image/*")
+                            intent.type = "image/*"
+                            val shareIntent = Intent.createChooser(intent, "Share Photo!")
+                            startActivity(shareIntent, null)
+                        } else {
+                            showToast(getString(R.string.something_went_wrong))
+                        }
+                    }
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    PERMISSION_REQUEST_CODE
+                )
+            }
         }
     }
 

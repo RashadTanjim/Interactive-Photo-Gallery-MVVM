@@ -22,7 +22,7 @@
         android:theme="@style/Theme.InteractivePhotoGallery">
 
         <activity
-            android:name=".ui.GalleryActivity"
+            android:name=".ui.gallery.GalleryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -31,16 +31,16 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="interactivephotogallery.page.link"
+                    android:host="rashadtanjim.info"
                     android:scheme="https" />
 
                 <data
-                    android:host="interactivephotogallery.page.link"
+                    android:host="rashadtanjim.info"
                     android:pathPrefix="/picsum"
                     android:scheme="https" />
 
                 <data
-                    android:host="www.interactivephotogallery.page.link"
+                    android:host="www.rashadtanjim.info"
                     android:pathPrefix="/picsum"
                     android:scheme="https" />
             </intent-filter>
