@@ -1,4 +1,4 @@
-package info.rashadtanjim.interactivephotogallery.ui.fragment
+package info.rashadtanjim.interactivephotogallery.ui.gallery
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,6 @@ import info.rashadtanjim.interactivephotogallery.data.source.remote.PicsumApi
 import info.rashadtanjim.interactivephotogallery.data.util.DataState
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentGalleryBinding
 import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotosItem
-import info.rashadtanjim.interactivephotogallery.ui.SharedViewModel
 import info.rashadtanjim.interactivephotogallery.ui.adapter.GalleryAdapter
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseFragment
 

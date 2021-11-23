@@ -15,12 +15,41 @@
     <application
         android:name=".App"
         android:allowBackup="true"
+        android:extractNativeLibs="true"
         android:icon="@drawable/ic_gallery"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_gallery"
         android:theme="@style/Theme.InteractivePhotoGallery">
+
+        <activity
+            android:name=".ui.gallery.GalleryActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="rashadtanjim.info"
+                    android:scheme="https" />
+
+                <data
+                    android:host="rashadtanjim.info"
+                    android:pathPrefix="/picsum"
+                    android:scheme="https" />
+
+                <data
+                    android:host="www.rashadtanjim.info"
+                    android:pathPrefix="/picsum"
+                    android:scheme="https" />
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".ui.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package info.rashadtanjim.interactivephotogallery.ui
+package info.rashadtanjim.interactivephotogallery.ui.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
