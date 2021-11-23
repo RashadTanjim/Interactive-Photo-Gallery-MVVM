@@ -9,5 +9,6 @@
     <string name="settings">Settings</string>
     <string name="about_developer">Developed by Md. Rashad Tanjim</string>
     <string name="night_mode">Night Mode</string>
+    <string name="zoom_in_out">Press Double Tap to Zoom!</string>
 
 </resources>

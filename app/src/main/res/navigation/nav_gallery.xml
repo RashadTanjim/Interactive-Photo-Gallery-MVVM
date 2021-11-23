@@ -15,21 +15,33 @@
             app:destination="@id/settingsFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_galleryFragment_to_photoViewFragment"
             app:destination="@id/photoViewFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="selected_photo"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/photoViewFragment"
         android:name="info.rashadtanjim.interactivephotogallery.ui.fragment.PhotoViewFragment"
         android:label="PhotoViewFragment"
-        tools:layout="@layout/fragment_photo_view" />
+        tools:layout="@layout/fragment_photo_view">
+        <argument
+            android:name="selected_photo"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="info.rashadtanjim.interactivephotogallery.ui.fragment.SettingsFragment"
@@ -40,8 +52,8 @@
             app:destination="@id/aboutAppFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/aboutAppFragment"
