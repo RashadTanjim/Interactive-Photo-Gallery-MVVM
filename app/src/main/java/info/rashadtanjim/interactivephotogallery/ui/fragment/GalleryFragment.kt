@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import info.rashadtanjim.core.utlis.showToast
 import info.rashadtanjim.core.utlis.snakbar
 import info.rashadtanjim.interactivephotogallery.App
@@ -13,22 +15,37 @@ import info.rashadtanjim.interactivephotogallery.data.repository.UserRepository
 import info.rashadtanjim.interactivephotogallery.data.source.remote.PicsumApi
 import info.rashadtanjim.interactivephotogallery.data.util.DataState
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentGalleryBinding
+import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotosItem
 import info.rashadtanjim.interactivephotogallery.ui.SharedViewModel
+import info.rashadtanjim.interactivephotogallery.ui.adapter.GalleryAdapter
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseFragment
 
 class GalleryFragment :
     BaseFragment<SharedViewModel, FragmentGalleryBinding, UserRepository>() {
 
+    private lateinit var galleryAdapter: GalleryAdapter
+
+    private var photoListItem: List<PicsumPhotosItem>? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        galleryAdapter = GalleryAdapter {
+            val action = GalleryFragmentDirections.actionGalleryFragmentToPhotoViewFragment()
+            action.selectedPhoto = it.download_url
+            findNavController().navigate(action)
+        }
+
+        binding.recycleViewPhotoList.adapter = galleryAdapter
 
         viewModel.photoList.observe(viewLifecycleOwner, {
 
             when (it) {
                 is DataState.Success -> {
                     //success update result
+                    updateUI(it.value)
+                    photoListItem = it.value
                     binding.progressBar.isVisible = false
-                    showToast("Success!")
                 }
                 is DataState.Loading -> {
                     binding.progressBar.isVisible = true
@@ -41,6 +58,14 @@ class GalleryFragment :
         })
 
         viewModel.photoData()
+
+        binding.imageButtonSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_galleryFragment_to_settingsFragment)
+        }
+    }
+
+    private fun updateUI(photoListItem: List<PicsumPhotosItem>?) {
+        galleryAdapter.submitList(photoListItem?.toMutableList())
     }
 
     override fun getViewModel() = SharedViewModel::class.java

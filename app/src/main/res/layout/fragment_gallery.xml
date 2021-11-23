@@ -19,16 +19,28 @@
         app:title="@string/app_name"
         app:titleTextColor="@color/white" />
 
+    <ImageButton
+        android:id="@+id/imageButtonSettings"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewPhotoList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:paddingTop="4dp"
+        android:scrollingCache="true"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:spanCount="2"
-        tools:itemCount="7"
+        tools:itemCount="8"
         tools:listitem="@layout/list_item_photos" />
 
     <TextView
