@@ -1,16 +1,22 @@
 package info.rashadtanjim.interactivephotogallery.ui.fragment
 
+import android.Manifest
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import info.rashadtanjim.core.utlis.hasStoragePermission
+import info.rashadtanjim.core.utlis.saveToSdCard
 import info.rashadtanjim.core.utlis.showToast
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentPhotoViewBinding
@@ -46,20 +52,36 @@ class PhotoViewFragment : DialogFragment() {
             selectedPhoto = it
         }
 
-        binding.zoomViewPhoto.load(selectedPhoto).also {
-            showToast(getString(R.string.zoom_in_out))
+        binding.imageButtonBack.setOnClickListener {
+            findNavController().popBackStack()
         }
+
+        Glide.with(requireContext()).load(selectedPhoto)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(binding.zoomViewPhoto)
 
         binding.imageButtonSave.setOnClickListener {
 
+            if (requireContext().hasStoragePermission()) {
+                requireContext().saveToSdCard(binding.zoomViewPhoto.drawable.toBitmap())
+                showToast(getString(R.string.photo_save))
+
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    PERMISSION_REQUEST_CODE
+                )
+            }
         }
 
         binding.imageButtonShare.setOnClickListener {
 
-        }
 
-        binding.imageButtonBack.setOnClickListener {
-            findNavController().popBackStack()
         }
+    }
+
+    companion object {
+        // write permission request
+        const val PERMISSION_REQUEST_CODE = 1001
     }
 }
