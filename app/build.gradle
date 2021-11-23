@@ -13,11 +13,6 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
-    /**
-     * TODO: Optimize repository mapping problem
-     * Warning: Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01
-     */
-
     defaultConfig {
         applicationId "info.rashadtanjim.interactivephotogallery"
         minSdk 23
