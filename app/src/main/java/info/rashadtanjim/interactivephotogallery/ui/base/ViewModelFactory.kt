@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import info.rashadtanjim.interactivephotogallery.data.repository.BaseRepository
 import info.rashadtanjim.interactivephotogallery.data.repository.UserRepository
-import info.rashadtanjim.interactivephotogallery.ui.SharedViewModel
+import info.rashadtanjim.interactivephotogallery.ui.gallery.SharedViewModel
 
 class ViewModelFactory(
     private val repository: BaseRepository

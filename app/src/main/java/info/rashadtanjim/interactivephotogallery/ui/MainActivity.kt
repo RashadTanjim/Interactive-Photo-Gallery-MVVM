@@ -11,6 +11,7 @@ import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.data.UserPreferences
 import info.rashadtanjim.interactivephotogallery.databinding.ActivityMainBinding
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseActivity
+import info.rashadtanjim.interactivephotogallery.ui.gallery.GalleryActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint

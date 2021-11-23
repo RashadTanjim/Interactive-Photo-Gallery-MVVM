@@ -1,4 +1,4 @@
-package info.rashadtanjim.interactivephotogallery.ui
+package info.rashadtanjim.interactivephotogallery.ui.gallery
 
 import android.os.Bundle
 import androidx.core.content.res.ResourcesCompat
