@@ -1,6 +1,6 @@
 # Interactive Gallery App
 
-### A simple image gallery that fetches data from **Lorem Picsum** API and builds with MVVM and with a touch of Clean Architecture.
+#### A simple image gallery that fetches data from **Lorem Picsum** API and builds with MVVM and with a touch of Clean Architecture.
 
 
 [Lorem Picsum](https://picsum.photos/): Lorem Picsum provides random or specific uploaded images as placeholders. Developers need to specify the desired image size (width & height) at the end of the request URL. Grayscale and blur effects can be applied to any image.
