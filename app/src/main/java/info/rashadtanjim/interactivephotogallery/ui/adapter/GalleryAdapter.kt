@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.ListItemPhotosBinding
 import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotosItem
@@ -28,13 +29,15 @@ class GalleryAdapter(
             }
         }
 
-        fun bind(photosItem: PicsumPhotosItem, position: Int, total: Int) {
+        fun bind(photosItem: PicsumPhotosItem) {
             selectedPhoto = photosItem
 
             itemBinding.textViewAuthorName.text = "Author: ${photosItem.author}"
             itemBinding.textViewPhotoNumber.text = "Photo ID: ${photosItem.id}"
 
-            itemBinding.imageViewItem.load(photosItem.download_url)
+            Glide.with(itemView).load(photosItem.download_url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)  // caching image file using Glide
+                .into(itemBinding.imageViewItem)
         }
     }
 
@@ -47,7 +50,7 @@ class GalleryAdapter(
 
     override fun onBindViewHolder(holder: ModuleViewHolder, position: Int) {
         val unit = getItem(position)
-        holder.bind(unit, position, itemCount)
+        holder.bind(unit)
     }
 }
 

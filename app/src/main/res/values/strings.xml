@@ -10,5 +10,6 @@
     <string name="about_developer">Developed by Md. Rashad Tanjim</string>
     <string name="night_mode">Night Mode</string>
     <string name="zoom_in_out">Press Double Tap to Zoom!</string>
+    <string name="photo_save">Photo saved in local storage!</string>
 
 </resources>
