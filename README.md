@@ -1,9 +1,11 @@
-# Interactive Gallery App build with MVVM with a touch of Clean Architecture
-A simple image gallery that fetches data from **Lorem Picsum** API. 
+# Interactive Gallery App
+
+### A simple image gallery that fetches data from **Lorem Picsum** API and builds with MVVM and with a touch of Clean Architecture.
+
 
 [Lorem Picsum](https://picsum.photos/): Lorem Picsum provides random or specific uploaded images as placeholders. Developers need to specify the desired image size (width & height) at the end of the request URL. Grayscale and blur effects can be applied to any image.
 
-[https://www.google.com/search?client=firefox-b-d&q=mvvm+architecture+android](MVVM Architecture): This guide encompasses best practices and recommended architecture for building robust, production-quality apps.
+[MVVM Architecture](https://developer.android.com/jetpack/guide): This guide encompasses best practices and recommended architecture for building robust, production-quality apps.
 
 ## Features
 1. Use https://picsum.photos to get a list of photos
@@ -28,12 +30,20 @@ A simple image gallery that fetches data from **Lorem Picsum** API.
 
 <img src="https://github.com/rashadtanjim/Documentation/screenshots/App.PNG" width="500px" />
 
+## Branch Description
+1. Main/ Master branch is set for main production branch
+2. Development Branch is set for all development face
+3. Room-implementation Branch is for implementing local database
+4. api-implementation Branch is for API integration
+5. ci-cd-pipeline Branch is for creating automation (Not yet implemented) 
+
 ## Download Demo on Android
 Download the [APK file from here](https://github.com/rashadtanjim/Documentation/app-release-0.1.apk?raw=true)
 
-## Libraries Used:
+## Libraries Used
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous and thread handling 
+- [Room](https://developer.android.com/jetpack/androidx/releases/room) - FThe Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
 - [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) - A cold asynchronous data stream that sequentially emits values and completes normally or with an exception.
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Data objects that notify views when the underlying database changes.
@@ -53,4 +63,22 @@ Download the [APK file from here](https://github.com/rashadtanjim/Documentation/
 <img src="https://github.com/rashadtanjim/Documentation/screenshots/jetpack.PNG" width="800px" height="450px" />
 
 
-## Developed By Md Rashad Tanjim - website: https://rashadtanjim.info/
+#### Developed By Md Rashad Tanjim - website: https://rashadtanjim.info/
+
+## License
+
+```
+   Copyright (C) 2021 MD RASHAD TANJIM
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
