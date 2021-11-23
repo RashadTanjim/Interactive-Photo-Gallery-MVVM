@@ -1,7 +1,9 @@
 package info.rashadtanjim.interactivephotogallery.ui.gallery
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -27,6 +29,7 @@ import com.google.firebase.dynamiclinks.ShortDynamicLink
 import info.rashadtanjim.core.utlis.*
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentPhotoViewBinding
+import java.io.ByteArrayOutputStream
 
 class PhotoViewFragment : DialogFragment() {
     private lateinit var binding: FragmentPhotoViewBinding
@@ -80,6 +83,7 @@ class PhotoViewFragment : DialogFragment() {
 
                 if (requireContext().isConnected()) {
                     binding.imageButtonSave.isVisible = true
+                    binding.imageButtonShare.isVisible = true
                 }
                 binding.progressBar.isVisible = false
                 showToast(getString(R.string.zoom_in_out))
@@ -102,7 +106,9 @@ class PhotoViewFragment : DialogFragment() {
 
         /**
          * Event: The action listen will trigger devices' default sharing option to share photo
-         * The Task will be done using firebase's [FirebaseDynamicLinks]
+         * The Task is done using two ways: I am using normal sharing as Firebase domain TXT addition is time taking
+         * 1. Photo normal sharing through [Intent]
+         * 2. firebase's [FirebaseDynamicLinks]
          * Before sharing [hasStoragePermission] checks write permission
          */
 
@@ -112,64 +118,12 @@ class PhotoViewFragment : DialogFragment() {
 
             if (requireContext().hasStoragePermission()) {
 
-                val uri: Uri? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    requireContext().saveImageInQ(mBitmap)
-                } else {
-                    val path = MediaStore.Images.Media.insertImage(
-                        requireActivity().contentResolver, mBitmap,
-                        "Image Description", null
-                    )
-                    Uri.parse(path)
-                }
+                val share = Intent(Intent.ACTION_SEND)
+                share.type = "image/*"
+                share.putExtra(Intent.EXTRA_STREAM, getImageUri(requireContext(), mBitmap))
 
-                FirebaseDynamicLinks.getInstance()
-                    .createDynamicLink()
-                    .setLink(Uri.parse("https://rashadtanjim.info/picsum/$selectedPhoto"))
-                    .setDomainUriPrefix("https://rashadtanjim.info")
-                    .setAndroidParameters(
-                        AndroidParameters.Builder("info.rashadtanjim.interactivephotogallery")
-                            .setMinimumVersion(0)
-                            .build()
-                    )
-                    .setIosParameters(
-                        IosParameters.Builder("info.rashadtanjim.interactivephotogallery")
-                            .setAppStoreId("0000000000")
-                            .setMinimumVersion("0.0.1")
-                            .build()
-                    )
-                    .setGoogleAnalyticsParameters(
-                        GoogleAnalyticsParameters.Builder()
-                            .setSource("picsum")
-                            .setMedium("social")
-                            .setCampaign("picsum-images")
-                            .build()
-                    )
-                    .setSocialMetaTagParameters(
-                        SocialMetaTagParameters.Builder()
-                            .setTitle("rashadtanjim.info")
-                            .setDescription(getString(R.string.about_app))
-                            .setTitle(getString(R.string.app_name))
-                            .build()
-                    )
-                    .buildShortDynamicLink()
-                    .addOnCompleteListener { task: Task<ShortDynamicLink> ->
-                        if (task.isSuccessful) {
-                            val shortLink = task.result.shortLink
+                startActivity(Intent.createChooser(share, "Share via"))
 
-                            val intent = Intent()
-                            intent.action = Intent.ACTION_SEND
-
-                            intent.putExtra(Intent.EXTRA_TEXT, "&$shortLink")
-                            intent.putExtra(Intent.EXTRA_STREAM, uri)
-
-//                            intent.setDataAndType(uri, "image/*")
-                            intent.type = "image/*"
-                            val shareIntent = Intent.createChooser(intent, "Share Photo!")
-                            startActivity(shareIntent, null)
-                        } else {
-                            showToast(getString(R.string.something_went_wrong))
-                        }
-                    }
             } else {
                 ActivityCompat.requestPermissions(
                     requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -177,6 +131,77 @@ class PhotoViewFragment : DialogFragment() {
                 )
             }
         }
+    }
+
+    private fun getImageUri(context: Context, bitmap: Bitmap): Uri? {
+        val byte = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byte)
+        val path = MediaStore.Images.Media.insertImage(
+            requireActivity().contentResolver, bitmap,
+            "Picsum Image Description", null
+        )
+        return Uri.parse(path)
+    }
+
+    private fun shareDynamicLink(mBitmap: Bitmap) {
+        val uri: Uri? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            requireContext().saveImageInQ(mBitmap)
+        } else {
+            val path = MediaStore.Images.Media.insertImage(
+                requireActivity().contentResolver, mBitmap,
+                "Image Description", null
+            )
+            Uri.parse(path)
+        }
+
+        FirebaseDynamicLinks.getInstance()
+            .createDynamicLink()
+            .setLink(Uri.parse("https://rashadtanjim.info/picsum/$selectedPhoto"))
+            .setDomainUriPrefix("https://rashadtanjim.info")
+            .setAndroidParameters(
+                AndroidParameters.Builder("info.rashadtanjim.interactivephotogallery")
+                    .setMinimumVersion(0)
+                    .build()
+            )
+            .setIosParameters(
+                IosParameters.Builder("info.rashadtanjim.interactivephotogallery")
+                    .setAppStoreId("0000000000")
+                    .setMinimumVersion("0.0.1")
+                    .build()
+            )
+            .setGoogleAnalyticsParameters(
+                GoogleAnalyticsParameters.Builder()
+                    .setSource("picsum")
+                    .setMedium("social")
+                    .setCampaign("picsum-images")
+                    .build()
+            )
+            .setSocialMetaTagParameters(
+                SocialMetaTagParameters.Builder()
+                    .setTitle("rashadtanjim.info")
+                    .setDescription(getString(R.string.about_app))
+                    .setTitle(getString(R.string.app_name))
+                    .build()
+            )
+            .buildShortDynamicLink()
+            .addOnCompleteListener { task: Task<ShortDynamicLink> ->
+                if (task.isSuccessful) {
+                    val shortLink = task.result.shortLink
+
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_SEND
+
+                    intent.putExtra(Intent.EXTRA_TEXT, "&$shortLink")
+                    intent.putExtra(Intent.EXTRA_STREAM, uri)
+
+                    //                            intent.setDataAndType(uri, "image/*")
+                    intent.type = "image/*"
+                    val shareIntent = Intent.createChooser(intent, "Share Photo!")
+                    startActivity(shareIntent, null)
+                } else {
+                    showToast(getString(R.string.something_went_wrong))
+                }
+            }
     }
 
     companion object {
