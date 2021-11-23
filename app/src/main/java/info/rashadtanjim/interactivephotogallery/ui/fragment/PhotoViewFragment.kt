@@ -10,14 +10,13 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import info.rashadtanjim.core.utlis.hasStoragePermission
-import info.rashadtanjim.core.utlis.saveToSdCard
-import info.rashadtanjim.core.utlis.showToast
+import info.rashadtanjim.core.utlis.*
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentPhotoViewBinding
 
@@ -56,9 +55,16 @@ class PhotoViewFragment : DialogFragment() {
             findNavController().popBackStack()
         }
 
-        Glide.with(requireContext()).load(selectedPhoto)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(binding.zoomViewPhoto)
+        Glide.with(requireContext()).load(selectedPhoto).diskCacheStrategy(DiskCacheStrategy.ALL)
+            .listener(GlideListenerImpl.OnCompleted {
+
+                if (requireContext().isConnected()) {
+                    binding.imageButtonSave.isVisible = true
+                }
+                binding.progressBar.isVisible = false
+                showToast(getString(R.string.zoom_in_out))
+
+            }).into(binding.zoomViewPhoto)
 
         binding.imageButtonSave.setOnClickListener {
 
