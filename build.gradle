@@ -16,6 +16,7 @@ buildscript {
         paging_version = "3.1.0"
         work_version = "2.7.1"
         preferences_version = "1.0.0"
+        lottie_version = "3.4.0"
     }
 
     repositories {
