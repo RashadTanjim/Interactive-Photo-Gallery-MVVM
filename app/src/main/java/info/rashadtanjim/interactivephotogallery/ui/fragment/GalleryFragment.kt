@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import info.rashadtanjim.core.utlis.showToast
 import info.rashadtanjim.core.utlis.snakbar
 import info.rashadtanjim.interactivephotogallery.App
 import info.rashadtanjim.interactivephotogallery.R
@@ -32,18 +30,20 @@ class GalleryFragment :
 
         galleryAdapter = GalleryAdapter {
             val action = GalleryFragmentDirections.actionGalleryFragmentToPhotoViewFragment()
+
             action.selectedPhoto = it.download_url
             findNavController().navigate(action)
         }
 
         binding.recycleViewPhotoList.adapter = galleryAdapter
+        binding.recycleViewPhotoList.setHasFixedSize(true)
 
         viewModel.photoList.observe(viewLifecycleOwner, {
 
             when (it) {
                 is DataState.Success -> {
-                    //success update result
-                    updateUI(it.value)
+                    updateUI(it.value)  //success update result
+
                     photoListItem = it.value
                     binding.progressBar.isVisible = false
                 }
