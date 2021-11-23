@@ -55,6 +55,18 @@ class PhotoViewFragment : DialogFragment() {
             findNavController().popBackStack()
         }
 
+        /**
+         * Case 1: [Glide] will load images from Picsum API - main case
+         *
+         * Exception on saving photo -
+         * 1. If device has write permission then save it through bitmap otherwise ask for [hasStoragePermission]
+         * 2. If Glide takes time to load or failed to load photo then the photo can not be save,
+         * the photo is converting to bitmap which will through null object exception. To handle this,
+         * [GlideListenerImpl] Object class is created to handle Glide event listener
+         * 3. The photo offline caching enable, if the photo is not loaded and
+         * device has not connected the the image download and share option is set [isVisible] false.
+         */
+
         Glide.with(requireContext()).load(selectedPhoto).diskCacheStrategy(DiskCacheStrategy.ALL)
             .listener(GlideListenerImpl.OnCompleted {
 
