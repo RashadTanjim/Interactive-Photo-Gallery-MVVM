@@ -7,6 +7,8 @@
 
 [MVVM Architecture](https://developer.android.com/jetpack/guide): This guide encompasses best practices and recommended architecture for building robust, production-quality apps.
 
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/): Used Conventional commit messages for committing every activity.
+
 ## Features
 1. Use https://picsum.photos to get a list of photos
 2. The user can tap the photo
@@ -17,6 +19,9 @@
 7. Cache API response
 8. Allow saving photos in JPEG format to the local gallery
 9. Allow sharing the photo
+10. Day-Night mode sync with Calendar Time
+11. Code In-line and Multi-line documents add
+12. Git Commits describes using Conventional Commit Message Guideline
 
 ## Architectural Pattern
 * Built with Modern Android Development (MAD) practices
