@@ -20,7 +20,21 @@ android {
         versionCode 1
         versionName "0.1.0"
 
+        def buildDateStamp = new Date().format("MMMM dd, yyyy")
+        buildConfigField "String", "LAST_BUILD_DATE", "\"$buildDateStamp\""
+
+        vectorDrawables.useSupportLibrary = true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../rashadtanjim_gallery.jks')
+            storePassword 'rashadtanjim_gallery'
+            keyAlias 'rashadtanjim_gallery'
+            keyPassword 'rashadtanjim_gallery'
+        }
     }
 
     buildTypes {
@@ -28,10 +42,13 @@ android {
             testCoverageEnabled true
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -39,14 +56,20 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
     }
+
     androidExtensions {
         features = ["parcelize"]
     }
+
     lintOptions {
-        disable "UnsafeExperimentalUsageError", "UnsafeExperimentalUsageWarning"
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 }
 
@@ -79,7 +102,7 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     // Hilt-Draggier for Dependency Injection
     implementation "com.google.dagger:hilt-android:$hilt_version"
