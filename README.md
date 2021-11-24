@@ -33,7 +33,7 @@
 * Full app built with Kotlin 
 * Jetpack Components used
 
-<img src="https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/app-preview" width="800px" />
+<img src="https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/app-preview.png" width="800px" />
 
 ## Branch Description
 1. Main/ Master branch is set for main production branch
