@@ -40,7 +40,8 @@
 2. Development Branch is set for all development face
 3. Room-implementation Branch is for implementing local database
 4. api-implementation Branch is for API integration
-5. ci-cd-pipeline Branch is for creating automation (Not yet implemented) 
+5. unit-test-imp Branch is for testing (not fully done)
+6. ci-cd-pipeline Branch is for creating automation (Plan implement later) 
 
 ## Download Demo on Android
 Download the [APK file](https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/app-release-0.1.0.apk?raw=true)
