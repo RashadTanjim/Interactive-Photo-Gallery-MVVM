@@ -3,14 +3,17 @@ package info.rashadtanjim.interactivephotogallery.ui.gallery
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.scopes.ViewModelScoped
 import info.rashadtanjim.interactivephotogallery.data.repository.UserRepository
 import info.rashadtanjim.interactivephotogallery.data.util.DataState
 import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotoList
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
+import javax.inject.Inject
 
-class SharedViewModel(
+@ViewModelScoped
+class SharedViewModel @Inject constructor(
     private val repository: UserRepository
 ) : BaseViewModel(repository) {
 

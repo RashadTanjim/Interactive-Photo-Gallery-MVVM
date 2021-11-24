@@ -26,11 +26,13 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.dynamiclinks.DynamicLink.*
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.ShortDynamicLink
+import dagger.hilt.android.scopes.FragmentScoped
 import info.rashadtanjim.core.utlis.*
 import info.rashadtanjim.interactivephotogallery.R
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentPhotoViewBinding
 import java.io.ByteArrayOutputStream
 
+@FragmentScoped
 class PhotoViewFragment : DialogFragment() {
     private lateinit var binding: FragmentPhotoViewBinding
 
