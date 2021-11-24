@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
+import java.util.*
 
 fun Context.isConnected(): Boolean {
     val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -43,6 +44,11 @@ fun Context.hasStoragePermission(): Boolean {
         )
         permission == PackageManager.PERMISSION_GRANTED
     } else true
+}
+
+fun Context.isNight(): Boolean {
+    val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    return (currentHour <= 7 || currentHour >= 18)
 }
 
 fun Context.saveToSdCard(bitmap: Bitmap): String? {

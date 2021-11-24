@@ -1,17 +1,29 @@
 package info.rashadtanjim.interactivephotogallery.ui.gallery
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.scopes.FragmentScoped
 import info.rashadtanjim.interactivephotogallery.App
 import info.rashadtanjim.interactivephotogallery.R
+import info.rashadtanjim.interactivephotogallery.data.UserPreferences
 import info.rashadtanjim.interactivephotogallery.data.repository.UserRepository
 import info.rashadtanjim.interactivephotogallery.data.source.remote.PicsumApi
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentSettingsBinding
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseFragment
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
+@FragmentScoped
 class SettingsFragment :
     BaseFragment<SharedViewModel, FragmentSettingsBinding, UserRepository>() {
 
@@ -35,26 +47,19 @@ class SettingsFragment :
             findNavController().navigate(R.id.action_settingsFragment_to_aboutAppFragment)
         }
 
-//        val isNightMode = runBlocking { userPreferences.nightMode.first() }
-//
-//        binding.dayNightMode.isChecked = isNightMode ?: false
-//
-//        binding.dayNightMode.setOnClickListener {
-//            lifecycleScope.launch {
-//                userPreferences.toggleNightMode(binding.dayNightMode.isChecked)
-//            }
-//        }
-//
-//        lifecycleScope.launchWhenCreated {
-//            userPreferences.nightMode.collectLatest {
-//                if (it == true) {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                } else {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                }
-//            }
-//        }
+        binding.dayNightMode.setOnClickListener {
 
+            // Get new mode.
+            val mode =
+                if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_NO) {
+                    AppCompatDelegate.MODE_NIGHT_YES
+                } else {
+                    AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+                }
+
+            // Change UI Mode
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
     }
 
     override fun getViewModel() = SharedViewModel::class.java

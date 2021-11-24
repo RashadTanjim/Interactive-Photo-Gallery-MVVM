@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#6E1FEA</color>
     <color name="background">#EDEDED</color>
+    <color name="statusBarColor">#6E1FEA</color>
     <color name="buttonRounded">#6E1FEA</color>
     <color name="teal_700">#FF018786</color>
     <color name="napPrimaryVariant">#681FDA</color>
