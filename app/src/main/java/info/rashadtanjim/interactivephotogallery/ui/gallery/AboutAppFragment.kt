@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.scopes.FragmentScoped
 import info.rashadtanjim.interactivephotogallery.App
 import info.rashadtanjim.interactivephotogallery.data.repository.UserRepository
 import info.rashadtanjim.interactivephotogallery.data.source.remote.PicsumApi
 import info.rashadtanjim.interactivephotogallery.databinding.FragmentAboutAppBinding
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseFragment
 
+@FragmentScoped
 class AboutAppFragment :
     BaseFragment<SharedViewModel, FragmentAboutAppBinding, UserRepository>() {
 

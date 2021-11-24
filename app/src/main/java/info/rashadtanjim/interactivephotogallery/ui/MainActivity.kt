@@ -12,6 +12,8 @@ import info.rashadtanjim.interactivephotogallery.data.UserPreferences
 import info.rashadtanjim.interactivephotogallery.databinding.ActivityMainBinding
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseActivity
 import info.rashadtanjim.interactivephotogallery.ui.gallery.GalleryActivity
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @AndroidEntryPoint

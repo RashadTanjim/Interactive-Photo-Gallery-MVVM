@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.scopes.FragmentScoped
 import info.rashadtanjim.core.utlis.snakbar
 import info.rashadtanjim.interactivephotogallery.App
 import info.rashadtanjim.interactivephotogallery.R
@@ -17,6 +18,7 @@ import info.rashadtanjim.interactivephotogallery.domain.model.PicsumPhotosItem
 import info.rashadtanjim.interactivephotogallery.ui.adapter.GalleryAdapter
 import info.rashadtanjim.interactivephotogallery.ui.base.BaseFragment
 
+@FragmentScoped
 class GalleryFragment :
     BaseFragment<SharedViewModel, FragmentGalleryBinding, UserRepository>() {
 
