@@ -33,7 +33,7 @@
 * Full app built with Kotlin 
 * Jetpack Components used
 
-<img src="https://github.com/rashadtanjim/Documentation/screenshots/App.PNG" width="500px" />
+<img src="https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/app-preview" width="800px" />
 
 ## Branch Description
 1. Main/ Master branch is set for main production branch
@@ -43,7 +43,7 @@
 5. ci-cd-pipeline Branch is for creating automation (Not yet implemented) 
 
 ## Download Demo on Android
-Download the [APK file from here](https://github.com/rashadtanjim/Documentation/app-release-0.1.apk?raw=true)
+Download the [APK file](https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/app-release-0.1.0.apk?raw=true)
 
 ## Libraries Used
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
@@ -65,7 +65,7 @@ Download the [APK file from here](https://github.com/rashadtanjim/Documentation/
 - [MockK](https://mockk.io) - For Mocking and Unit Testing.
 - [Glide](https://github.com/bumptech/glide/) - Glide is a fast and efficient open-source media management and image loading framework for Android that wraps media decoding, memory, and disk caching, and resource pooling into a simple and easy to use interface.
 
-<img src="https://github.com/rashadtanjim/Documentation/screenshots/jetpack.PNG" width="800px" height="450px" />
+<img src="https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/Jetpack.png" width="800px" height="400px" />
 
 
 #### Developed By Md Rashad Tanjim - website: https://rashadtanjim.info/
