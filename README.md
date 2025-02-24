@@ -14,11 +14,11 @@
 2. The user can tap the photo
 3. The user can see a full-screen view of the photo
 4. The user has an infinite scroll on the gallery screen
-5. The app’s a flavor/scheme can be changed easily so that changing from development API to production API becomes trivial
+5. The app’s flavor/scheme can be changed easily so that switching from development API to production API becomes trivial
 6. Cache images
 7. Cache API response
 8. Allow saving photos in JPEG format to the local gallery
-9. Allow sharing the photo
+9. Allow sharing of the photo using the Firebase dynamic-link
 10. Day-Night mode sync with Calendar Time
 11. Code In-line and Multi-line documents add
 12. Git Commits describes using Conventional Commit Message Guideline
@@ -26,7 +26,7 @@
 ## Architectural Pattern
 * Built with Modern Android Development (MAD) practices
 * Utilization of clean architecture and SOLID design principles
-* Utilized Usecase, Repository pattern for data
+* Utilized Usecase, a Repository pattern for data
 * Includes unit tests for Use cases, Repository, ViewModels, API response
 * Dependency Injection using Dragger-Hilt
 * Util class to reduce common code duplication
@@ -36,10 +36,10 @@
 <img src="https://github.com/RashadTanjim/Interactive-Photo-Gallery-MVVM/blob/main/Documentation/app-preview.png" width="800px" />
 
 ## Branch Description
-1. Main/ Master branch is set for main production branch
-2. Development Branch is set for all development face
-3. Room-implementation Branch is for implementing local database
-4. api-implementation Branch is for API integration
+1. Main/ Master branch is set for the main production branch
+2. The Development Branch is set for all development face
+3. The Room-implementation Branch is for implementing local database
+4. The api-implementation Branch is for API integration
 5. unit-test-imp Branch is for testing (not fully done)
 6. ci-cd-pipeline Branch is for creating automation (Plan implement later) 
 
